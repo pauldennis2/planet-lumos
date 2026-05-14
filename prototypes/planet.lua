@@ -12,8 +12,11 @@ data:extend({
     magnitude = 0.9,
     draw_orbit = true,
 
-    -- Nauvis tile generation; entities and decoratives are suppressed.
+    -- Nauvis tile generation. Only lumite is allowed to entity-autoplace.
     map_gen_settings = {
+      autoplace_controls = {
+        lumite = {frequency = 1, size = 1, richness = 1},
+      },
       autoplace_settings = {
         tile      = {treat_missing_as_default = true},
         entity    = {treat_missing_as_default = false},

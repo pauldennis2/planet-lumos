@@ -1,3 +1,6 @@
+require("prototypes.item")
+require("prototypes.resource")
+require("prototypes.recipe")
 require("prototypes.planet")
 require("prototypes.space-connection")
 require("prototypes.technology")

@@ -2,7 +2,6 @@ data:extend({
   {
     type = "technology",
     name = "planet-discovery-lumos",
-    -- Reuse a planet-discovery icon as a placeholder until we have our own art.
     icon = "__space-age__/graphics/technology/planet-discovery-vulcanus.png",
     icon_size = 256,
     order = "e-b",
@@ -23,6 +22,28 @@ data:extend({
         space_location = "lumos",
         use_icon_overlay_constant = true,
       },
+      {
+        type = "unlock-recipe",
+        recipe = "lumos-science-pack",
+      },
     },
+  },
+
+  {
+    type = "technology",
+    name = "miniaturization-1",
+    -- Placeholder icon; replace with custom art when available.
+    icon = "__space-age__/graphics/technology/planet-discovery-fulgora.png",
+    icon_size = 256,
+    order = "e-c",
+    prerequisites = {"planet-discovery-lumos"},
+    unit = {
+      count = 50,
+      ingredients = {
+        {"lumos-science-pack", 1},
+      },
+      time = 60,
+    },
+    effects = {},
   },
 })
