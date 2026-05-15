@@ -1,3 +1,5 @@
+local asteroid_util = require("__space-age__.prototypes.planet.asteroid-spawn-definitions")
+
 -- Custom surface property used to gate Lumos-only entity placement.
 data:extend({{
   type = "surface-property",
@@ -9,10 +11,11 @@ data:extend({
   {
     type = "planet",
     name = "lumos",
+    subgroup = "planets",
     label_color = {r = 0.75, g = 0.85, b = 1.0},
-    icon = "__space-age__/graphics/icons/nauvis.png",
+    icon = "__base__/graphics/icons/nauvis.png",
     icon_size = 64,
-    starmap_icon = "__space-age__/graphics/icons/nauvis.png",
+    starmap_icon = "__base__/graphics/icons/nauvis.png",
     starmap_icon_size = 64,
     distance = 20,
     orientation = 0.25,
@@ -42,9 +45,6 @@ data:extend({
       ["lumos-surface"]   = 1,
     },
 
-    asteroid_spawn_definitions = {
-      {asteroid = "metallic-asteroid-small", probability = 0.1, speed = 0.2},
-      {asteroid = "rocky-asteroid-small",    probability = 0.1, speed = 0.2},
-    },
+    asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_lumos, 0.9),
   },
 })

@@ -1,5 +1,4 @@
--- Noise layer drives the random placement pattern for lumite patches.
-data:extend({{type = "noise-layer", name = "lumite"}})
+local resource_autoplace = require("resource-autoplace")
 
 data:extend({
   {
@@ -16,19 +15,16 @@ local lumite = table.deepcopy(data.raw["resource"]["iron-ore"])
 lumite.name               = "lumite"
 lumite.localised_name     = nil
 lumite.localised_description = nil
-lumite.map_color          = {r = 0.45, g = 0.55, b = 0.9}  -- blue-ish tint on minimap
+lumite.map_color          = {r = 0.45, g = 0.55, b = 0.9}
 lumite.minable            = {mining_time = 1, result = "lumite"}
-lumite.autoplace          = {
-  control = "lumite",
-  order   = "b-a",
-  peaks   = {
-    {noise_layer = "lumite", noise_octaves_difference = -2, noise_persistence = 0.9},
-  },
-  sharpness                        = 0.3,
-  richness_base                    = 500,
-  richness_multiplier              = 2000,
-  richness_multiplier_distance_bonus = 8,
-  starting_area_amount             = 2000,
-  starting_area_size               = 3,
-}
+lumite.autoplace          = resource_autoplace.resource_autoplace_settings({
+  name                          = "lumite",
+  order                         = "b-a",
+  autoplace_control_name        = "lumite",
+  base_density                  = 10,
+  base_spots_per_km2            = 2,
+  has_starting_area_placement   = true,
+  regular_rq_factor_multiplier  = 1.0,
+  starting_rq_factor_multiplier = 1.4,
+})
 data:extend({lumite})

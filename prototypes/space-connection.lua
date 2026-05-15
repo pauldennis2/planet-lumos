@@ -1,16 +1,14 @@
+local asteroid_util = require("__space-age__.prototypes.planet.asteroid-spawn-definitions")
+
 data:extend({
   {
     type = "space-connection",
     name = "nauvis-lumos",
-    subgroup = "space-connection",
+    subgroup = "planet-connections",
     from = "nauvis",
     to = "lumos",
-    order = "b-a",  -- after nauvis-vulcanus (a-*)
+    order = "b-a",
     length = 10000,
-    asteroid_spawn_definitions = {
-      {type = "entity", asteroid = "metallic-asteroid-small", probability = 0.08, speed = 0.2},
-      {type = "entity", asteroid = "rocky-asteroid-small",    probability = 0.08, speed = 0.2},
-      {type = "entity", asteroid = "metallic-asteroid-medium",probability = 0.02, speed = 0.15},
-    },
+    asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_lumos),
   },
 })

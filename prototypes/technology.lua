@@ -2,7 +2,7 @@ data:extend({
   {
     type = "technology",
     name = "planet-discovery-lumos",
-    icon = "__space-age__/graphics/technology/planet-discovery-vulcanus.png",
+    icon = "__base__/graphics/technology/space-science-pack.png",
     icon_size = 256,
     order = "e-b",
     prerequisites = {"rocket-silo"},
@@ -32,7 +32,7 @@ data:extend({
   {
     type = "technology",
     name = "lumoplating",
-    icon = "__space-age__/graphics/technology/planet-discovery-fulgora.png",
+    icon = "__base__/graphics/technology/advanced-material-processing.png",
     icon_size = 256,
     order = "e-b-a",
     prerequisites = {"planet-discovery-lumos"},
@@ -49,16 +49,13 @@ data:extend({
   {
     type = "technology",
     name = "miniaturization-1",
-    -- Placeholder icon; replace with custom art when available.
-    icon = "__space-age__/graphics/technology/planet-discovery-fulgora.png",
+    icon = "__base__/graphics/technology/module.png",
     icon_size = 256,
     order = "e-c",
     prerequisites = {"planet-discovery-lumos"},
     unit = {
       count = 50,
-      ingredients = {
-        {"lumos-science-pack", 1},
-      },
+      ingredients = {{"lumos-science-pack", 1}},
       time = 60,
     },
     effects = {},
@@ -67,7 +64,7 @@ data:extend({
   {
     type = "technology",
     name = "foundry-miniaturization-1",
-    icon = "__space-age__/graphics/technology/planet-discovery-vulcanus.png",
+    icon = "__base__/graphics/technology/rocket-silo.png",
     icon_size = 256,
     order = "e-d",
     prerequisites = {"miniaturization-1"},
