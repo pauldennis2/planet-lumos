@@ -161,3 +161,24 @@ data:extend({
     },
   },
 })
+
+if mods["bobassembly"] and data.raw["assembling-machine"]["bob-assembling-machine-6"] then
+  data:extend({
+    {
+      type = "technology",
+      name = "bob-am6-miniaturization-1",
+      icon = "__base__/graphics/technology/bulk-inserter.png",
+      icon_size = 256,
+      order = "e-j",
+      prerequisites = {"miniaturization-1"},
+      unit = {
+        count = 10,
+        ingredients = {{"lumos-science-pack", 1}},
+        time = 60,
+      },
+      effects = {
+        {type = "unlock-recipe", recipe = "bob-am6-mini1"},
+      },
+    },
+  })
+end

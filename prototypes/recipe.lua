@@ -63,28 +63,41 @@ data:extend({
   {
     type = "recipe",
     name = "lumoplate",
-    enabled = false,      -- unlocked by lumoplating
+    enabled = false,
     category = "metallurgy",
     energy_required = 1,
     ingredients = {
       {type = "item", name = "lumite", amount = 1},
     },
-    results = {
-      {type = "item", name = "lumoplate", amount = 1},
-    },
+    results = {{type = "item", name = "lumoplate", amount = 1}},
   },
 
   {
     type = "recipe",
     name = "lumos-science-pack",
-    enabled = false,  -- unlocked by planet-discovery-lumos
+    enabled = false,
     category = "crafting",
     energy_required = 1,
     ingredients = {
       {type = "item", name = "lumite", amount = 1},
     },
-    results = {
-      {type = "item", name = "lumos-science-pack", amount = 1},
-    },
+    results = {{type = "item", name = "lumos-science-pack", amount = 1}},
   },
 })
+
+if mods["bobassembly"] and data.raw["assembling-machine"]["bob-assembling-machine-6"] then
+  data:extend({
+    {
+      type = "recipe",
+      name = "bob-am6-mini1",
+      enabled = false,
+      category = "crafting",
+      energy_required = 10,
+      ingredients = {
+        {type = "item", name = "bob-assembling-machine-6", amount = 1},
+        {type = "item", name = "lumite",                   amount = 5},
+      },
+      results = {{type = "item", name = "bob-am6-mini1", amount = 1}},
+    },
+  })
+end

@@ -31,6 +31,10 @@ data:extend({
   make_mini_item("cryogenic-plant",       "cryo-plant-mini1"),
 })
 
+if mods["bobassembly"] and data.raw["item"]["bob-assembling-machine-6"] then
+  data:extend({make_mini_item("bob-assembling-machine-6", "bob-am6-mini1")})
+end
+
 data:extend({
   -- Lumoplate (placeholder icon: iron plate)
   {
