@@ -74,6 +74,8 @@ end
 data:extend({
   -- 5×5 → 4×4,  area_scale = 16/25
   make_mini("foundry",               "foundry-mini1",    4, 4, 5, 5),
+  -- 5×5 → 3×3,  area_scale = 9/25  (based on original foundry, not mini1)
+  make_mini("foundry",               "foundry-mini2",    3, 3, 5, 5),
   -- 3×3 → 2×2,  area_scale = 4/9
   make_mini("assembling-machine-3",  "assembler-mini1",  2, 2, 3, 3),
   -- 4×4 → 3×3,  area_scale = 9/16

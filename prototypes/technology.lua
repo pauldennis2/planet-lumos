@@ -128,4 +128,36 @@ data:extend({
       {type = "unlock-recipe", recipe = "foundry-mini1"},
     },
   },
+
+  {
+    type = "technology",
+    name = "miniaturization-2",
+    icon = "__base__/graphics/technology/speed-module-2.png",
+    icon_size = 256,
+    order = "e-h",
+    prerequisites = {"miniaturization-1"},
+    unit = {
+      count = 200,
+      ingredients = {{"lumos-science-pack", 1}},
+      time = 60,
+    },
+    effects = {},
+  },
+
+  {
+    type = "technology",
+    name = "foundry-miniaturization-2",
+    icon = "__base__/graphics/technology/productivity-module-3.png",
+    icon_size = 256,
+    order = "e-i",
+    prerequisites = {"miniaturization-2", "foundry-miniaturization-1"},
+    unit = {
+      count = 100,
+      ingredients = {{"lumos-science-pack", 1}},
+      time = 60,
+    },
+    effects = {
+      {type = "unlock-recipe", recipe = "foundry-mini2"},
+    },
+  },
 })

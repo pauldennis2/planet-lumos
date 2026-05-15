@@ -25,6 +25,7 @@ end
 
 data:extend({
   make_mini_item("foundry",               "foundry-mini1"),
+  make_mini_item("foundry",               "foundry-mini2"),
   make_mini_item("assembling-machine-3",  "assembler-mini1"),
   make_mini_item("electromagnetic-plant", "em-plant-mini1"),
   make_mini_item("cryogenic-plant",       "cryo-plant-mini1"),

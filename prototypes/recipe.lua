@@ -13,6 +13,18 @@ data:extend({
   },
   {
     type = "recipe",
+    name = "foundry-mini2",
+    enabled = false,
+    category = "crafting",
+    energy_required = 15,
+    ingredients = {
+      {type = "item", name = "foundry-mini1", amount = 1},
+      {type = "item", name = "lumite",        amount = 10},
+    },
+    results = {{type = "item", name = "foundry-mini2", amount = 1}},
+  },
+  {
+    type = "recipe",
     name = "assembler-mini1",
     enabled = false,
     category = "crafting",
