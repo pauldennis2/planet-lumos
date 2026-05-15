@@ -47,8 +47,8 @@ mini.crafting_speed = foundry.crafting_speed * area_scale
 -- Picking up the entity returns the mini item, not the full foundry.
 mini.minable = {mining_time = 0.5, result = "foundry-mini1"}
 
--- Can only be placed on Lumos (surface-property defined in planet.lua).
-mini.surface_conditions = {{property = "lumos-surface", min = 1}}
+-- No placement restriction; placeable anywhere a regular foundry can go.
+mini.surface_conditions = nil
 
 scale_fluid_boxes(mini.fluid_boxes)
 

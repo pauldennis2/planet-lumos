@@ -5,6 +5,8 @@ data:extend({
     enabled = false,         -- unlocked by foundry-miniaturization-1
     category = "crafting",
     energy_required = 10,
+    -- Can only be executed on Lumos.
+    surface_conditions = {{property = "lumos-surface", min = 1}},
     ingredients = {
       {type = "item", name = "foundry", amount = 1},
       {type = "item", name = "lumite",  amount = 5},
