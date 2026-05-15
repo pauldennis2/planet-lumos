@@ -135,7 +135,7 @@ data:extend({
     icon = "__base__/graphics/technology/speed-module-2.png",
     icon_size = 256,
     order = "e-h",
-    prerequisites = {"miniaturization-1"},
+    prerequisites = {"miniaturization-1", "lumoplating"},
     unit = {
       count = 200,
       ingredients = {{"lumos-science-pack", 1}},

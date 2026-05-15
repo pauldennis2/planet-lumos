@@ -19,7 +19,7 @@ data:extend({
     energy_required = 15,
     ingredients = {
       {type = "item", name = "foundry-mini1", amount = 1},
-      {type = "item", name = "lumite",        amount = 10},
+      {type = "item", name = "lumoplate",     amount = 10},
     },
     results = {{type = "item", name = "foundry-mini2", amount = 1}},
   },
