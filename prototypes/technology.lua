@@ -63,6 +63,57 @@ data:extend({
 
   {
     type = "technology",
+    name = "assembler-miniaturization-1",
+    icon = "__base__/graphics/technology/automation-3.png",
+    icon_size = 256,
+    order = "e-e",
+    prerequisites = {"miniaturization-1"},
+    unit = {
+      count = 10,
+      ingredients = {{"lumos-science-pack", 1}},
+      time = 60,
+    },
+    effects = {
+      {type = "unlock-recipe", recipe = "assembler-mini1"},
+    },
+  },
+
+  {
+    type = "technology",
+    name = "em-plant-miniaturization-1",
+    icon = "__base__/graphics/technology/electronics.png",
+    icon_size = 256,
+    order = "e-f",
+    prerequisites = {"miniaturization-1"},
+    unit = {
+      count = 10,
+      ingredients = {{"lumos-science-pack", 1}},
+      time = 60,
+    },
+    effects = {
+      {type = "unlock-recipe", recipe = "em-plant-mini1"},
+    },
+  },
+
+  {
+    type = "technology",
+    name = "cryo-plant-miniaturization-1",
+    icon = "__base__/graphics/technology/lubricant.png",
+    icon_size = 256,
+    order = "e-g",
+    prerequisites = {"miniaturization-1"},
+    unit = {
+      count = 10,
+      ingredients = {{"lumos-science-pack", 1}},
+      time = 60,
+    },
+    effects = {
+      {type = "unlock-recipe", recipe = "cryo-plant-mini1"},
+    },
+  },
+
+  {
+    type = "technology",
     name = "foundry-miniaturization-1",
     icon = "__base__/graphics/technology/rocket-silo.png",
     icon_size = 256,

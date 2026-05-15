@@ -14,12 +14,21 @@ data:extend({
   -- place_result links to the entity defined in entity.lua.
 })
 
-local foundry_item = table.deepcopy(data.raw["item"]["foundry"])
-foundry_item.name               = "foundry-mini1"
-foundry_item.localised_name     = nil
-foundry_item.localised_description = nil
-foundry_item.place_result       = "foundry-mini1"
-data:extend({foundry_item})
+local function make_mini_item(base_name, mini_name)
+  local item = table.deepcopy(data.raw["item"][base_name])
+  item.name                  = mini_name
+  item.localised_name        = nil
+  item.localised_description = nil
+  item.place_result          = mini_name
+  return item
+end
+
+data:extend({
+  make_mini_item("foundry",               "foundry-mini1"),
+  make_mini_item("assembling-machine-3",  "assembler-mini1"),
+  make_mini_item("electromagnetic-plant", "em-plant-mini1"),
+  make_mini_item("cryogenic-plant",       "cryo-plant-mini1"),
+})
 
 data:extend({
   -- Lumoplate (placeholder icon: iron plate)
