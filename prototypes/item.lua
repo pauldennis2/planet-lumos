@@ -10,6 +10,18 @@ data:extend({
     stack_size = 50,
   },
 
+  -- Foundry Mini1 item (placeholder: inherits foundry icon)
+  -- place_result links to the entity defined in entity.lua.
+})
+
+local foundry_item = table.deepcopy(data.raw["item"]["foundry"])
+foundry_item.name               = "foundry-mini1"
+foundry_item.localised_name     = nil
+foundry_item.localised_description = nil
+foundry_item.place_result       = "foundry-mini1"
+data:extend({foundry_item})
+
+data:extend({
   -- Lumos science pack (placeholder icon: automation science pack)
   {
     type = "tool",

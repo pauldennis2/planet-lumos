@@ -1,3 +1,10 @@
+-- Custom surface property used to gate Lumos-only entity placement.
+data:extend({{
+  type = "surface-property",
+  name = "lumos-surface",
+  default_value = 0,
+}})
+
 data:extend({
   {
     type = "planet",
@@ -32,6 +39,7 @@ data:extend({
       ["solar-power"]     = 100,
       pressure            = 1000,
       gravity             = 10,
+      ["lumos-surface"]   = 1,
     },
 
     asteroid_spawn_definitions = {

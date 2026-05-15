@@ -46,4 +46,21 @@ data:extend({
     },
     effects = {},
   },
+
+  {
+    type = "technology",
+    name = "foundry-miniaturization-1",
+    icon = "__space-age__/graphics/technology/planet-discovery-vulcanus.png",
+    icon_size = 256,
+    order = "e-d",
+    prerequisites = {"miniaturization-1"},
+    unit = {
+      count = 100,
+      ingredients = {{"lumos-science-pack", 1}},
+      time = 60,
+    },
+    effects = {
+      {type = "unlock-recipe", recipe = "foundry-mini1"},
+    },
+  },
 })
