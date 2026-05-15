@@ -22,6 +22,17 @@ foundry_item.place_result       = "foundry-mini1"
 data:extend({foundry_item})
 
 data:extend({
+  -- Lumoplate (placeholder icon: iron plate)
+  {
+    type = "item",
+    name = "lumoplate",
+    icon = "__base__/graphics/icons/iron-plate.png",
+    icon_size = 64,
+    subgroup = "intermediate-product",
+    order = "z[lumoplate]",
+    stack_size = 100,
+  },
+
   -- Lumos science pack (placeholder icon: automation science pack)
   {
     type = "tool",

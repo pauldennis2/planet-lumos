@@ -31,6 +31,23 @@ data:extend({
 
   {
     type = "technology",
+    name = "lumoplating",
+    icon = "__space-age__/graphics/technology/planet-discovery-fulgora.png",
+    icon_size = 256,
+    order = "e-b-a",
+    prerequisites = {"planet-discovery-lumos"},
+    unit = {
+      count = 50,
+      ingredients = {{"lumos-science-pack", 1}},
+      time = 60,
+    },
+    effects = {
+      {type = "unlock-recipe", recipe = "lumoplate"},
+    },
+  },
+
+  {
+    type = "technology",
     name = "miniaturization-1",
     -- Placeholder icon; replace with custom art when available.
     icon = "__space-age__/graphics/technology/planet-discovery-fulgora.png",
