@@ -1,6 +1,7 @@
 require("prototypes.asteroid-defs")
 require("prototypes.item")
 require("prototypes.resource")
+require("prototypes.terrain")
 require("prototypes.recipe")
 require("prototypes.planet")
 require("prototypes.entity")

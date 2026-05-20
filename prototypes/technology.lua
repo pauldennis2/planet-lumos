@@ -43,9 +43,16 @@ data:extend({
     },
     effects = {
       {type = "unlock-recipe", recipe = "lumoplate"},
+      {type = "unlock-recipe", recipe = "miniaturization-testing-facility"},
+      {type = "unlock-recipe", recipe = "miniaturization-research-facility"},
+      {type = "unlock-recipe", recipe = "foundry-miniaturization-data"},
+      {type = "unlock-recipe", recipe = "em-plant-miniaturization-data"},
     },
   },
 
+})
+
+data:extend({
   {
     type = "technology",
     name = "miniaturization-1",
@@ -63,23 +70,6 @@ data:extend({
 
   {
     type = "technology",
-    name = "assembler-miniaturization-1",
-    icon = "__base__/graphics/technology/automation-3.png",
-    icon_size = 256,
-    order = "e-e",
-    prerequisites = {"miniaturization-1"},
-    unit = {
-      count = 10,
-      ingredients = {{"lumos-science-pack", 1}},
-      time = 60,
-    },
-    effects = {
-      {type = "unlock-recipe", recipe = "assembler-mini1"},
-    },
-  },
-
-  {
-    type = "technology",
     name = "em-plant-miniaturization-1",
     icon = "__base__/graphics/technology/electronics.png",
     icon_size = 256,
@@ -87,28 +77,11 @@ data:extend({
     prerequisites = {"miniaturization-1"},
     unit = {
       count = 10,
-      ingredients = {{"lumos-science-pack", 1}},
+      ingredients = {{"lumos-science-pack", 1}, {"em-plant-miniaturization-data", 1}},
       time = 60,
     },
     effects = {
       {type = "unlock-recipe", recipe = "em-plant-mini1"},
-    },
-  },
-
-  {
-    type = "technology",
-    name = "cryo-plant-miniaturization-1",
-    icon = "__base__/graphics/technology/lubricant.png",
-    icon_size = 256,
-    order = "e-g",
-    prerequisites = {"miniaturization-1"},
-    unit = {
-      count = 10,
-      ingredients = {{"lumos-science-pack", 1}},
-      time = 60,
-    },
-    effects = {
-      {type = "unlock-recipe", recipe = "cryo-plant-mini1"},
     },
   },
 
@@ -121,7 +94,7 @@ data:extend({
     prerequisites = {"miniaturization-1"},
     unit = {
       count = 100,
-      ingredients = {{"lumos-science-pack", 1}},
+      ingredients = {{"lumos-science-pack", 1}, {"foundry-miniaturization-data", 1}},
       time = 60,
     },
     effects = {
@@ -137,7 +110,7 @@ data:extend({
     order = "e-h",
     prerequisites = {"miniaturization-1", "lumoplating"},
     unit = {
-      count = 200,
+      count = 2000,
       ingredients = {{"lumos-science-pack", 1}},
       time = 60,
     },
@@ -152,15 +125,53 @@ data:extend({
     order = "e-i",
     prerequisites = {"miniaturization-2", "foundry-miniaturization-1"},
     unit = {
-      count = 100,
-      ingredients = {{"lumos-science-pack", 1}},
+      count = 50,
+      ingredients = {{"lumos-science-pack", 1}, {"foundry-miniaturization-data", 1}},
       time = 60,
     },
     effects = {
       {type = "unlock-recipe", recipe = "foundry-mini2"},
     },
   },
+
+  {
+    type = "technology",
+    name = "chem-plant-miniaturization-1",
+    icon = "__base__/graphics/technology/chemical-science-pack.png",
+    icon_size = 256,
+    order = "e-k",
+    prerequisites = {"miniaturization-1"},
+    unit = {
+      count = 10,
+      ingredients = {{"lumos-science-pack", 1}},
+      time = 60,
+    },
+    effects = {
+      {type = "unlock-recipe", recipe = "chem-plant-mini1"},
+    },
+  },
 })
+
+if not mods["bobassembly"] then
+  data:extend({
+    {
+      type = "technology",
+      name = "assembler-miniaturization-1",
+      icon = "__base__/graphics/technology/automation-3.png",
+      icon_size = 256,
+      order = "e-e",
+      prerequisites = {"miniaturization-1"},
+      unit = {
+        count = 10,
+        ingredients = {{"lumos-science-pack", 1}},
+        time = 60,
+      },
+      effects = {
+        {type = "unlock-recipe", recipe = "assembler-mini1"},
+      },
+    },
+  })
+end
 
 if mods["bobassembly"] and data.raw["assembling-machine"]["bob-assembling-machine-6"] then
   data:extend({
@@ -178,6 +189,27 @@ if mods["bobassembly"] and data.raw["assembling-machine"]["bob-assembling-machin
       },
       effects = {
         {type = "unlock-recipe", recipe = "bob-am6-mini1"},
+      },
+    },
+  })
+end
+
+if mods["bobassembly"] and data.raw["assembling-machine"]["bob-chemical-plant-4"] then
+  data:extend({
+    {
+      type = "technology",
+      name = "bob-chem4-miniaturization-1",
+      icon = "__base__/graphics/technology/chemical-science-pack.png",
+      icon_size = 256,
+      order = "e-l",
+      prerequisites = {"chem-plant-miniaturization-1"},
+      unit = {
+        count = 10,
+        ingredients = {{"lumos-science-pack", 1}},
+        time = 60,
+      },
+      effects = {
+        {type = "unlock-recipe", recipe = "bob-chem4-mini1"},
       },
     },
   })

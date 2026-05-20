@@ -22,15 +22,26 @@ data:extend({
     magnitude = 0.9,
     draw_orbit = true,
 
-    -- Nauvis tile generation. Only lumite is allowed to entity-autoplace.
     map_gen_settings = {
-      autoplace_controls = {
-        lumite = {frequency = 1, size = 1, richness = 1},
+      property_expression_names = {
+        ["entity:lumite:probability"] = "lumos_lumite_probability",
+        ["entity:lumite:richness"]    = "lumos_lumite_richness",
       },
       autoplace_settings = {
-        tile      = {treat_missing_as_default = true},
-        entity    = {treat_missing_as_default = false},
-        decorative= {treat_missing_as_default = false},
+        tile = {
+          treat_missing_as_default = false,
+          settings = {
+            ["lumos-ground"] = {},
+            ["lumos-lava"]   = {},
+          },
+        },
+        entity = {
+          treat_missing_as_default = false,
+          settings = {
+            ["lumite"] = {},
+          },
+        },
+        decorative = {treat_missing_as_default = false},
       },
       cliff_settings = {cliff_elevation_interval = 0},
       peaceful_mode = true,
