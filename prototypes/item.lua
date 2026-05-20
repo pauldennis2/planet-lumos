@@ -1,4 +1,57 @@
 data:extend({
+  {
+    type = "fluid",
+    name = "liquid-light",
+    default_temperature = 25,
+    max_temperature = 100,
+    heat_capacity = "0.1kJ",
+    base_color = {r = 1.0, g = 0.9, b = 0.2},
+    flow_color = {r = 1.0, g = 1.0, b = 0.5},
+    icon = "__base__/graphics/icons/fluid/steam.png",
+    icon_size = 64,
+    order = "a[liquid-light]",
+    subgroup = "fluid",
+    auto_barrel = false,
+  },
+})
+
+data:extend({
+  {
+    type = "item",
+    name = "big-lamp-mini1",
+    icon = "__base__/graphics/icons/small-lamp.png",
+    icon_size = 64,
+    subgroup = "energy-pipe-distribution",
+    order = "b[lamp]-c[big-lamp-mini1]",
+    stack_size = 20,
+    place_result = "big-lamp-mini1",
+  },
+  {
+    type = "item",
+    name = "big-lamp-mini2",
+    icon = "__base__/graphics/icons/small-lamp.png",
+    icon_size = 64,
+    subgroup = "energy-pipe-distribution",
+    order = "b[lamp]-d[big-lamp-mini2]",
+    stack_size = 20,
+    place_result = "big-lamp-mini2",
+  },
+})
+
+data:extend({
+  {
+    type = "item",
+    name = "big-lamp",
+    icon = "__base__/graphics/icons/small-lamp.png",
+    icon_size = 64,
+    subgroup = "energy-pipe-distribution",
+    order = "b[lamp]-b[big-lamp]",
+    stack_size = 20,
+    place_result = "big-lamp",
+  },
+})
+
+data:extend({
   -- Lumite ore (placeholder icon: iron ore)
   {
     type = "item",
@@ -44,6 +97,8 @@ end
 
 data:extend({
   make_mini_item("assembling-machine-3", "miniaturization-testing-facility"),
+  make_mini_item("assembling-machine-3", "miniaturization-testing-facility-mini1"),
+  make_mini_item("assembling-machine-3", "miniaturization-testing-facility-mini2"),
   make_mini_item("lab",                  "miniaturization-research-facility"),
   {
     type = "tool",

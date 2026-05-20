@@ -24,8 +24,10 @@ data:extend({
 
     map_gen_settings = {
       property_expression_names = {
-        ["entity:lumite:probability"] = "lumos_lumite_probability",
-        ["entity:lumite:richness"]    = "lumos_lumite_richness",
+        ["entity:lumite:probability"]     = "lumos_lumite_probability",
+        ["entity:lumite:richness"]        = "lumos_lumite_richness",
+        ["entity:light-vent:probability"] = "lumos_light_vent_probability",
+        ["entity:light-vent:richness"]    = "lumos_light_vent_richness",
       },
       autoplace_settings = {
         tile = {
@@ -38,7 +40,8 @@ data:extend({
         entity = {
           treat_missing_as_default = false,
           settings = {
-            ["lumite"] = {},
+            ["lumite"]      = {},
+            ["light-vent"]  = {},
           },
         },
         decorative = {treat_missing_as_default = false},
@@ -48,9 +51,9 @@ data:extend({
     },
 
     surface_properties = {
-      ["day-night-cycle"] = 25000,
+      ["day-night-cycle"] = 720000000,  -- effectively permanent night (~138 real days per cycle)
       ["magnetic-field"]  = 99,
-      ["solar-power"]     = 100,
+      ["solar-power"]     = 0,
       pressure            = 1000,
       gravity             = 10,
       ["lumos-surface"]   = 1,

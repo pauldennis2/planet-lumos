@@ -116,6 +116,119 @@ local function make_mini(base_name, mini_name, new_w, new_h, old_w, old_h)
   return mini
 end
 
+do
+  local base = data.raw["lamp"]["small-lamp"]
+  local scale = 5  -- big lamp is 5× the small lamp in each dimension
+
+  local big = {}
+  for k, v in pairs(base) do big[k] = v end
+
+  big.name                = "big-lamp"
+  big.localised_name      = nil
+  big.localised_description = nil
+  big.icon                = "__base__/graphics/icons/small-lamp.png"
+  big.icon_size           = 64
+  big.tile_width          = 5
+  big.tile_height         = 5
+  big.collision_box       = {{-1.9, -1.9}, {1.9, 1.9}}
+  big.selection_box       = {{-2.5, -2.5}, {2.5, 2.5}}
+  big.max_health          = 500
+  big.fast_replaceable_group = nil
+  big.minable             = {mining_time = 0.5, result = "big-lamp"}
+  big.energy_usage_per_tick = "25kW"  -- 5× small lamp
+
+  -- size = 60 gives roughly 15-tile effective radius (small lamp: size=40, ~10-tile effective).
+  -- NOTE: quality scaling of light.size is not supported by the lamp prototype natively;
+  -- a control.lua on_entity_settings_pasted handler would be needed to implement it.
+  big.light               = {intensity = 0.9, size = 60, color = {1, 1, 0.75}}
+  big.light_when_colored  = {intensity = 0,   size = 15, color = {1, 1, 0.75}}
+  big.glow_size           = 15
+
+  -- Scale sprites 5× by multiplying scale and shift values.
+  big.picture_off = {
+    layers = {
+      {
+        filename = "__base__/graphics/entity/small-lamp/lamp.png",
+        priority = "high",
+        width    = 83,
+        height   = 70,
+        shift    = util.by_pixel(0.25 * scale, 3 * scale),
+        scale    = 0.5 * scale,
+      },
+      {
+        filename        = "__base__/graphics/entity/small-lamp/lamp-shadow.png",
+        priority        = "high",
+        width           = 76,
+        height          = 47,
+        shift           = util.by_pixel(4 * scale, 4.75 * scale),
+        draw_as_shadow  = true,
+        scale           = 0.5 * scale,
+      },
+    },
+  }
+  big.picture_on = {
+    filename = "__base__/graphics/entity/small-lamp/lamp-light.png",
+    priority = "high",
+    width    = 90,
+    height   = 78,
+    shift    = util.by_pixel(0, -7 * scale),
+    scale    = 0.5 * scale,
+  }
+
+  -- Drop circuit connector — position offsets are hardcoded for 1×1 and would misplace on 5×5.
+  big.circuit_connector       = nil
+  big.circuit_wire_max_distance = nil
+
+  data:extend({big})
+end
+
+do
+  -- Lamp mini helper: shallow-copies big-lamp and rescales sprite by sprite_scale.
+  -- Light radius stays fixed at size=60; only size, collision, and power change.
+  local function make_lamp_mini(mini_name, tile_size, collision_r, energy_str, sprite_scale)
+    local base = data.raw["lamp"]["big-lamp"]
+    local mini = {}
+    for k, v in pairs(base) do mini[k] = v end
+    mini.name             = mini_name
+    mini.localised_name   = nil
+    mini.localised_description = nil
+    mini.tile_width       = tile_size
+    mini.tile_height      = tile_size
+    mini.collision_box    = {{-collision_r, -collision_r}, {collision_r, collision_r}}
+    mini.selection_box    = {{-tile_size/2, -tile_size/2}, {tile_size/2, tile_size/2}}
+    mini.minable          = {mining_time = 0.5, result = mini_name}
+    mini.energy_usage_per_tick = energy_str
+    local s = sprite_scale
+    mini.picture_off = {
+      layers = {
+        {
+          filename = "__base__/graphics/entity/small-lamp/lamp.png",
+          priority = "high", width = 83, height = 70,
+          shift = util.by_pixel(0.25 * s, 3 * s), scale = 0.5 * s,
+        },
+        {
+          filename = "__base__/graphics/entity/small-lamp/lamp-shadow.png",
+          priority = "high", width = 76, height = 47,
+          shift = util.by_pixel(4 * s, 4.75 * s), draw_as_shadow = true, scale = 0.5 * s,
+        },
+      },
+    }
+    mini.picture_on = {
+      filename = "__base__/graphics/entity/small-lamp/lamp-light.png",
+      priority = "high", width = 90, height = 78,
+      shift = util.by_pixel(0, -7 * s), scale = 0.5 * s,
+    }
+    return mini
+  end
+
+  data:extend({
+    -- 5×5 → 3×3 (+50% power)
+    make_lamp_mini("big-lamp-mini1", 3, 1.1, "37.5kW", 3),
+    -- 5×5 → 1×1 (+100% power)
+    make_lamp_mini("big-lamp-mini2", 1, 0.15, "50kW", 1),
+  })
+end
+
 data:extend({
   -- 5×5 → 4×4,  area_scale = 16/25
   make_mini("foundry",               "foundry-mini1",    4, 4, 5, 5),
@@ -168,6 +281,37 @@ do
     mtf.graphics_set = rescale_gs(base.graphics_set, 4)
   end
   data:extend({mtf})
+end
+
+do
+  -- MTF minis: rescale the MTF's already-4×-scaled graphics by tile_size/12 to reach the
+  -- correct visual size. Crafting speed intentionally decreases (smaller = slower research).
+  local mtf = data.raw["assembling-machine"]["miniaturization-testing-facility"]
+  local function make_mtf_mini(mini_name, tile_size, speed)
+    local mini = {}
+    for k, v in pairs(mtf) do mini[k] = v end
+    mini.name             = mini_name
+    mini.localised_name   = nil
+    mini.localised_description = nil
+    mini.tile_width       = tile_size
+    mini.tile_height      = tile_size
+    mini.collision_box    = {{-(tile_size/2 - 0.3), -(tile_size/2 - 0.3)},
+                             { (tile_size/2 - 0.3),  (tile_size/2 - 0.3)}}
+    mini.selection_box    = {{-tile_size/2, -tile_size/2}, {tile_size/2, tile_size/2}}
+    mini.drawing_box                    = nil
+    mini.drawing_box_vertical_extension = nil
+    mini.crafting_speed   = speed
+    mini.minable          = {mining_time = 1.0, result = mini_name}
+    if mtf.graphics_set then
+      mini.graphics_set = rescale_gs(mtf.graphics_set, tile_size / 12)
+    end
+    return mini
+  end
+
+  data:extend({
+    make_mtf_mini("miniaturization-testing-facility-mini1", 8, 18),
+    make_mtf_mini("miniaturization-testing-facility-mini2", 4, 16),
+  })
 end
 
 do

@@ -3,6 +3,71 @@ data:extend({{type = "recipe-category", name = "miniaturization"}})
 data:extend({
   {
     type = "recipe",
+    name = "big-lamp",
+    enabled = false,
+    energy_required = 5,
+    ingredients = {
+      {type = "item", name = "small-lamp",  amount = 5},
+      {type = "item", name = "iron-plate",  amount = 10},
+      {type = "item", name = "lumoplate",   amount = 2},
+    },
+    results = {{type = "item", name = "big-lamp", amount = 1}},
+  },
+  {
+    type = "recipe",
+    name = "big-lamp-mini1",
+    enabled = false,
+    category = "miniaturization",
+    energy_required = 10,
+    ingredients = {
+      {type = "item", name = "big-lamp",  amount = 1},
+      {type = "item", name = "lumoplate", amount = 5},
+    },
+    results = {{type = "item", name = "big-lamp-mini1", amount = 1}},
+  },
+  {
+    type = "recipe",
+    name = "big-lamp-mini2",
+    enabled = false,
+    category = "miniaturization",
+    energy_required = 20,
+    ingredients = {
+      {type = "item", name = "big-lamp-mini1", amount = 1},
+      {type = "item", name = "lumoplate",      amount = 10},
+    },
+    results = {{type = "item", name = "big-lamp-mini2", amount = 1}},
+  },
+  {
+    type = "recipe",
+    name = "miniaturization-testing-facility-mini1",
+    enabled = false,
+    category = "miniaturization",
+    energy_required = 60,
+    ingredients = {
+      {type = "item", name = "miniaturization-testing-facility", amount = 1},
+      {type = "item", name = "lumoplate",                        amount = 20},
+      {type = "item", name = "steel-plate",                      amount = 10},
+    },
+    results = {{type = "item", name = "miniaturization-testing-facility-mini1", amount = 1}},
+  },
+  {
+    type = "recipe",
+    name = "miniaturization-testing-facility-mini2",
+    enabled = false,
+    category = "miniaturization",
+    energy_required = 120,
+    ingredients = {
+      {type = "item", name = "miniaturization-testing-facility-mini1", amount = 1},
+      {type = "item", name = "lumoplate",                              amount = 40},
+      {type = "item", name = "steel-plate",                            amount = 20},
+    },
+    results = {{type = "item", name = "miniaturization-testing-facility-mini2", amount = 1}},
+  },
+})
+
+data:extend({
+  {
+    type = "recipe",
     name = "foundry-mini1",
     enabled = false,
     category = "miniaturization",

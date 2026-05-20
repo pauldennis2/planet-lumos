@@ -43,6 +43,7 @@ data:extend({
     },
     effects = {
       {type = "unlock-recipe", recipe = "lumoplate"},
+      {type = "unlock-recipe", recipe = "big-lamp"},
       {type = "unlock-recipe", recipe = "miniaturization-testing-facility"},
       {type = "unlock-recipe", recipe = "miniaturization-research-facility"},
       {type = "unlock-recipe", recipe = "foundry-miniaturization-data"},
@@ -131,6 +132,74 @@ data:extend({
     },
     effects = {
       {type = "unlock-recipe", recipe = "foundry-mini2"},
+    },
+  },
+
+  {
+    type = "technology",
+    name = "big-lamp-miniaturization-1",
+    icon = "__base__/graphics/technology/electric-energy-distribution-1.png",
+    icon_size = 256,
+    order = "e-m",
+    prerequisites = {"miniaturization-1", "lumoplating"},
+    unit = {
+      count = 20,
+      ingredients = {{"lumos-science-pack", 1}},
+      time = 60,
+    },
+    effects = {
+      {type = "unlock-recipe", recipe = "big-lamp-mini1"},
+    },
+  },
+
+  {
+    type = "technology",
+    name = "big-lamp-miniaturization-2",
+    icon = "__base__/graphics/technology/electric-energy-distribution-2.png",
+    icon_size = 256,
+    order = "e-n",
+    prerequisites = {"miniaturization-2", "big-lamp-miniaturization-1"},
+    unit = {
+      count = 50,
+      ingredients = {{"lumos-science-pack", 1}},
+      time = 60,
+    },
+    effects = {
+      {type = "unlock-recipe", recipe = "big-lamp-mini2"},
+    },
+  },
+
+  {
+    type = "technology",
+    name = "mtf-miniaturization-1",
+    icon = "__base__/graphics/technology/productivity-module-2.png",
+    icon_size = 256,
+    order = "e-o",
+    prerequisites = {"miniaturization-1", "lumoplating"},
+    unit = {
+      count = 50,
+      ingredients = {{"lumos-science-pack", 1}},
+      time = 60,
+    },
+    effects = {
+      {type = "unlock-recipe", recipe = "miniaturization-testing-facility-mini1"},
+    },
+  },
+
+  {
+    type = "technology",
+    name = "mtf-miniaturization-2",
+    icon = "__base__/graphics/technology/productivity-module-3.png",
+    icon_size = 256,
+    order = "e-p",
+    prerequisites = {"miniaturization-2", "mtf-miniaturization-1"},
+    unit = {
+      count = 200,
+      ingredients = {{"lumos-science-pack", 1}},
+      time = 60,
+    },
+    effects = {
+      {type = "unlock-recipe", recipe = "miniaturization-testing-facility-mini2"},
     },
   },
 

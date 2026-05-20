@@ -57,6 +57,26 @@ data:extend({
   },
 })
 
+-- Light vent: scattered patches across the snake interior.
+-- Multioctave noise creates patchy coverage; spawn boost (radius 120) ensures
+-- the starting area always has light vents available.
+data:extend({
+  {
+    type = "noise-expression",
+    name = "lumos_light_vent_probability",
+    expression =
+      "if(lumos_snake_mask > 0," ..
+      "  multioctave_noise{x=x, y=y, seed0=map_seed, seed1=5519, octaves=2, persistence=0.5, input_scale=0.04, output_scale=0.7}" ..
+      "  + clamp((120 - sqrt(x*x+y*y)) / 120, 0, 1)," ..
+      "  -1)",
+  },
+  {
+    type = "noise-expression",
+    name = "lumos_light_vent_richness",
+    expression = "max(60000, 60000 + distance * 2000)",
+  },
+})
+
 -- Land tile: volcanic-soil-dark graphics, Lumos autoplace.
 local ground = table.deepcopy(data.raw["tile"]["volcanic-soil-dark"])
 ground.name                = "lumos-ground"
