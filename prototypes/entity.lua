@@ -315,6 +315,60 @@ do
 end
 
 do
+  local solar = data.raw["solar-panel"]["solar-panel"]
+  data:extend({
+    {
+      type = "electric-energy-interface",
+      name = "shadow-generator",
+      icon = "__base__/graphics/icons/solar-panel.png",
+      icon_size = 64,
+      flags = {"placeable-neutral", "placeable-player", "player-creation"},
+      minable = {mining_time = 0.5, result = "shadow-generator"},
+      max_health = solar and solar.max_health or 200,
+      corpse = solar and solar.corpse,
+      dying_explosion = solar and solar.dying_explosion,
+      tile_width = 3,
+      tile_height = 3,
+      collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
+      selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+      energy_source = {
+        type = "electric",
+        usage_priority = "primary-output",
+        buffer_capacity = "1MJ",
+        drain = "0W",
+      },
+      energy_production = "60kW",
+      energy_usage = "0W",
+      surface_conditions = {{property = "lumos-surface", min = 1}},
+      animation = {
+        layers = {
+          {
+            filename  = "__base__/graphics/entity/solar-panel/solar-panel.png",
+            priority  = "high",
+            width     = 230,
+            height    = 224,
+            shift     = util.by_pixel(-3, 3.5),
+            scale     = 0.5,
+            frame_count = 1,
+            tint      = {r = 0.3, g = 0.3, b = 0.9, a = 1.0},
+          },
+          {
+            filename       = "__base__/graphics/entity/solar-panel/solar-panel-shadow.png",
+            priority       = "high",
+            width          = 220,
+            height         = 180,
+            shift          = util.by_pixel(9.5, 6),
+            draw_as_shadow = true,
+            scale          = 0.5,
+            frame_count    = 1,
+          },
+        },
+      },
+    },
+  })
+end
+
+do
   local base = data.raw["lab"]["lab"]
   local mrf = {}
   for k, v in pairs(base) do mrf[k] = v end

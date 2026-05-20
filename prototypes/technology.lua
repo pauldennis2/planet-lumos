@@ -48,6 +48,7 @@ data:extend({
       {type = "unlock-recipe", recipe = "miniaturization-research-facility"},
       {type = "unlock-recipe", recipe = "foundry-miniaturization-data"},
       {type = "unlock-recipe", recipe = "em-plant-miniaturization-data"},
+      {type = "unlock-recipe", recipe = "shadow-generator"},
     },
   },
 

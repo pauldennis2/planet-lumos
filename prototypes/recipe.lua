@@ -170,6 +170,22 @@ end
 data:extend({
   {
     type = "recipe",
+    name = "shadow-generator",
+    enabled = false,
+    category = "crafting",
+    energy_required = 10,
+    ingredients = {
+      {type = "item", name = "solar-panel",      amount = 3},
+      {type = "item", name = "lumoplate",        amount = 5},
+      {type = "item", name = "advanced-circuit", amount = 5},
+    },
+    results = {{type = "item", name = "shadow-generator", amount = 1}},
+  },
+})
+
+data:extend({
+  {
+    type = "recipe",
     name = "lumoplate",
     enabled = false,
     category = "metallurgy",

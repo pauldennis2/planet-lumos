@@ -141,6 +141,19 @@ if not mods["bobassembly"] then
 end
 
 data:extend({
+  {
+    type = "item",
+    name = "shadow-generator",
+    icon = "__base__/graphics/icons/solar-panel.png",
+    icon_size = 64,
+    subgroup = "energy",
+    order = "f[shadow-generator]",
+    stack_size = 10,
+    place_result = "shadow-generator",
+  },
+})
+
+data:extend({
   -- Lumoplate (placeholder icon: iron plate)
   {
     type = "item",

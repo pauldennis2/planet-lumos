@@ -53,21 +53,23 @@ data:extend({
   {
     type = "noise-expression",
     name = "lumos_lumite_richness",
-    expression = "max(150, 150 + distance / 4)",
+    expression = "max(3000, 3000 + distance * 100)",
   },
 })
 
--- Light vent: scattered patches across the snake interior.
--- Multioctave noise creates patchy coverage; spawn boost (radius 120) ensures
--- the starting area always has light vents available.
+-- Light vent: rare scattered patches across the snake interior.
+-- High noise threshold (subtract 0.25 bias) so only prominent peaks qualify.
+-- Small spawn boost near origin (radius 40, max +0.3) guarantees a few vents
+-- in the starting area without flooding it.
 data:extend({
   {
     type = "noise-expression",
     name = "lumos_light_vent_probability",
     expression =
       "if(lumos_snake_mask > 0," ..
-      "  multioctave_noise{x=x, y=y, seed0=map_seed, seed1=5519, octaves=2, persistence=0.5, input_scale=0.04, output_scale=0.7}" ..
-      "  + clamp((120 - sqrt(x*x+y*y)) / 120, 0, 1)," ..
+      "  multioctave_noise{x=x, y=y, seed0=map_seed, seed1=5519, octaves=2, persistence=0.5, input_scale=0.04, output_scale=0.35}" ..
+      "  - 0.2" ..
+      "  + clamp((40 - sqrt(x*x+y*y)) / 40, 0, 0.3)," ..
       "  -1)",
   },
   {
