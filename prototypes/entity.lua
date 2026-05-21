@@ -137,12 +137,14 @@ do
   big.minable             = {mining_time = 0.5, result = "big-lamp"}
   big.energy_usage_per_tick = "25kW"  -- 5× small lamp
 
-  -- size = 60 gives roughly 15-tile effective radius (small lamp: size=40, ~10-tile effective).
-  -- NOTE: quality scaling of light.size is not supported by the lamp prototype natively;
-  -- a control.lua on_entity_settings_pasted handler would be needed to implement it.
   big.light               = {intensity = 0.9, size = 60, color = {1, 1, 0.75}}
   big.light_when_colored  = {intensity = 0,   size = 15, color = {1, 1, 0.75}}
   big.glow_size           = 15
+  big.radius_visualisation_specification = {
+    distance        = 15,
+    draw_in_cursor  = true,
+    draw_on_selection = true,
+  }
 
   -- Scale sprites 5× by multiplying scale and shift values.
   big.picture_off = {
@@ -316,55 +318,64 @@ end
 
 do
   local solar = data.raw["solar-panel"]["solar-panel"]
-  data:extend({
-    {
+
+  -- sf = sprite scale factor relative to the base 3×3 solar-panel sprite (scale=0.5).
+  local function make_shadow_gen(name, tiles, power_kw, sf)
+    local cr = tiles / 2 - 0.1  -- collision radius
+    return {
       type = "electric-energy-interface",
-      name = "shadow-generator",
+      name = name,
       icon = "__base__/graphics/icons/solar-panel.png",
       icon_size = 64,
       flags = {"placeable-neutral", "placeable-player", "player-creation"},
-      minable = {mining_time = 0.5, result = "shadow-generator"},
+      minable = {mining_time = 0.5, result = name},
       max_health = solar and solar.max_health or 200,
       corpse = solar and solar.corpse,
       dying_explosion = solar and solar.dying_explosion,
-      tile_width = 3,
-      tile_height = 3,
-      collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
-      selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+      tile_width  = tiles,
+      tile_height = tiles,
+      collision_box = {{-cr, -cr}, {cr, cr}},
+      selection_box = {{-tiles/2, -tiles/2}, {tiles/2, tiles/2}},
       energy_source = {
         type = "electric",
         usage_priority = "primary-output",
         buffer_capacity = "1MJ",
         drain = "0W",
       },
-      energy_production = "60kW",
+      energy_production = power_kw .. "kW",
       energy_usage = "0W",
       surface_conditions = {{property = "lumos-surface", min = 1}},
       animation = {
         layers = {
           {
-            filename  = "__base__/graphics/entity/solar-panel/solar-panel.png",
-            priority  = "high",
-            width     = 230,
-            height    = 224,
-            shift     = util.by_pixel(-3, 3.5),
-            scale     = 0.5,
+            filename    = "__base__/graphics/entity/solar-panel/solar-panel.png",
+            priority    = "high",
+            width       = 230,
+            height      = 224,
+            shift       = util.by_pixel(-3 * sf, 3.5 * sf),
+            scale       = 0.5 * sf,
             frame_count = 1,
-            tint      = {r = 0.3, g = 0.3, b = 0.9, a = 1.0},
+            tint        = {r = 0.3, g = 0.3, b = 0.9, a = 1.0},
           },
           {
             filename       = "__base__/graphics/entity/solar-panel/solar-panel-shadow.png",
             priority       = "high",
             width          = 220,
             height         = 180,
-            shift          = util.by_pixel(9.5, 6),
+            shift          = util.by_pixel(9.5 * sf, 6 * sf),
             draw_as_shadow = true,
-            scale          = 0.5,
+            scale          = 0.5 * sf,
             frame_count    = 1,
           },
         },
       },
-    },
+    }
+  end
+
+  data:extend({
+    make_shadow_gen("shadow-generator",      7, 160, 7/3),
+    make_shadow_gen("shadow-generator-mini1", 5, 150, 5/3),
+    make_shadow_gen("shadow-generator-mini2", 3, 140, 1),
   })
 end
 
@@ -385,4 +396,47 @@ do
   mrf.surface_conditions     = nil
   mrf.next_upgrade           = nil
   data:extend({mrf})
+end
+
+do
+  -- Invisible quality-light companions spawned by control.lua next to big lamps.
+  -- Each tier extends the light radius via a higher prototype light.size.
+  -- Void energy source keeps them always on; sprites scaled to invisible.
+  local function make_quality_light(name, light_size)
+    local e = table.deepcopy(data.raw["lamp"]["small-lamp"])
+    e.name               = name
+    e.localised_name     = nil
+    e.localised_description = nil
+    e.flags              = {"not-blueprintable", "not-deconstructable",
+                            "placeable-off-grid", "not-selectable-in-game"}
+    e.collision_box      = {{-0.1, -0.1}, {0.1, 0.1}}
+    e.collision_mask     = {layers = {}}
+    e.selection_box      = {{0, 0}, {0, 0}}
+    e.selectable_in_game = false
+    e.energy_source      = {type = "void"}
+    e.energy_usage_per_tick = "1W"
+    e.light              = {intensity = 0.9, size = light_size, color = {1, 1, 0.75}}
+    e.light_when_colored = {intensity = 0, size = 0}
+    e.glow_size          = 0
+    e.circuit_connector        = nil
+    e.circuit_wire_max_distance = nil
+    local function shrink(s)
+      if type(s) ~= "table" then return end
+      if s.layers then
+        for _, layer in ipairs(s.layers) do shrink(layer) end
+      else
+        s.scale = 0.001
+      end
+    end
+    shrink(e.picture_on)
+    shrink(e.picture_off)
+    return e
+  end
+
+  data:extend({
+    make_quality_light("lumos-light-uncommon",   84),
+    make_quality_light("lumos-light-rare",      104),
+    make_quality_light("lumos-light-epic",      128),
+    make_quality_light("lumos-light-legendary", 150),
+  })
 end

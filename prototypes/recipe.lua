@@ -181,6 +181,32 @@ data:extend({
     },
     results = {{type = "item", name = "shadow-generator", amount = 1}},
   },
+  {
+    type = "recipe",
+    name = "shadow-generator-mini1",
+    enabled = false,
+    category = "crafting",
+    energy_required = 15,
+    ingredients = {
+      {type = "item", name = "shadow-generator", amount = 1},
+      {type = "item", name = "lumoplate",        amount = 10},
+      {type = "item", name = "processing-unit",  amount = 5},
+    },
+    results = {{type = "item", name = "shadow-generator-mini1", amount = 1}},
+  },
+  {
+    type = "recipe",
+    name = "shadow-generator-mini2",
+    enabled = false,
+    category = "crafting",
+    energy_required = 15,
+    ingredients = {
+      {type = "item", name = "shadow-generator-mini1", amount = 1},
+      {type = "item", name = "lumoplate",              amount = 10},
+      {type = "item", name = "processing-unit",        amount = 5},
+    },
+    results = {{type = "item", name = "shadow-generator-mini2", amount = 1}},
+  },
 })
 
 data:extend({

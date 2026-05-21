@@ -57,19 +57,17 @@ data:extend({
   },
 })
 
--- Light vent: rare scattered patches across the snake interior.
--- High noise threshold (subtract 0.25 bias) so only prominent peaks qualify.
--- Small spawn boost near origin (radius 40, max +0.3) guarantees a few vents
--- in the starting area without flooding it.
+-- Light vent: very sparse, deep-map resource.
+-- No manual spawn boost — relies on has_starting_area_placement in resource_autoplace.
+-- Threshold at 0.22/0.30 ≈ top 25% of noise peaks; combined with low base_density
+-- this gives a handful per km² at default map settings.
 data:extend({
   {
     type = "noise-expression",
     name = "lumos_light_vent_probability",
     expression =
       "if(lumos_snake_mask > 0," ..
-      "  multioctave_noise{x=x, y=y, seed0=map_seed, seed1=5519, octaves=2, persistence=0.5, input_scale=0.04, output_scale=0.35}" ..
-      "  - 0.2" ..
-      "  + clamp((40 - sqrt(x*x+y*y)) / 40, 0, 0.3)," ..
+      "  multioctave_noise{x=x, y=y, seed0=map_seed, seed1=5519, octaves=2, persistence=0.5, input_scale=0.04, output_scale=0.30} - 0.22," ..
       "  -1)",
   },
   {
@@ -86,9 +84,12 @@ ground.sprite_usage_surface = nil  -- allow rendering on Lumos, not just Vulcanu
 ground.autoplace           = { probability_expression = "lumos_snake_mask" }
 
 -- Lava tile: standard lava graphics/hazard, fills everywhere ground doesn't win.
+-- effect = nil: removes the animated lava-2 glow overlay, which was creating
+-- ambient light that overwhelmed lamp light circles on the snake path.
 local lava_out = table.deepcopy(data.raw["tile"]["lava"])
 lava_out.name                = "lumos-lava"
 lava_out.sprite_usage_surface = nil
+lava_out.effect              = nil
 lava_out.autoplace           = { probability_expression = "1" }
 
 data:extend({ ground, lava_out })

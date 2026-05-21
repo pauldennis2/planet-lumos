@@ -138,6 +138,40 @@ data:extend({
 
   {
     type = "technology",
+    name = "shadow-generator-miniaturization-1",
+    icon = "__base__/graphics/technology/electric-energy-distribution-1.png",
+    icon_size = 256,
+    order = "e-q",
+    prerequisites = {"miniaturization-1", "lumoplating"},
+    unit = {
+      count = 30,
+      ingredients = {{"lumos-science-pack", 1}},
+      time = 60,
+    },
+    effects = {
+      {type = "unlock-recipe", recipe = "shadow-generator-mini1"},
+    },
+  },
+
+  {
+    type = "technology",
+    name = "shadow-generator-miniaturization-2",
+    icon = "__base__/graphics/technology/electric-energy-distribution-2.png",
+    icon_size = 256,
+    order = "e-r",
+    prerequisites = {"miniaturization-2", "shadow-generator-miniaturization-1"},
+    unit = {
+      count = 100,
+      ingredients = {{"lumos-science-pack", 1}},
+      time = 60,
+    },
+    effects = {
+      {type = "unlock-recipe", recipe = "shadow-generator-mini2"},
+    },
+  },
+
+  {
+    type = "technology",
     name = "big-lamp-miniaturization-1",
     icon = "__base__/graphics/technology/electric-energy-distribution-1.png",
     icon_size = 256,

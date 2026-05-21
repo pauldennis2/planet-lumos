@@ -59,6 +59,22 @@ data:extend({
       ["lumos-surface"]   = 1,
     },
 
+    surface_render_parameters = {
+      -- Use the full Fulgora LUT range. Frozen at daytime=0.5, Factorio interpolates
+      -- 50/50 between fulgora-3-after-sunset and fulgora-4-before-dawn — the same
+      -- blend Fulgora uses at its darkest night, where lamps are confirmed to work.
+      -- Using pure fulgora-4 at all times black-crushes lamp light circles.
+      day_night_cycle_color_lookup = {
+        {0.00, "__space-age__/graphics/lut/fulgora-1-noon.png"},
+        {0.20, "__space-age__/graphics/lut/fulgora-1-noon.png"},
+        {0.30, "__space-age__/graphics/lut/fulgora-2-afternoon.png"},
+        {0.40, "__space-age__/graphics/lut/fulgora-3-after-sunset.png"},
+        {0.60, "__space-age__/graphics/lut/fulgora-4-before-dawn.png"},
+        {0.70, "__space-age__/graphics/lut/fulgora-5-morning.png"},
+        {1.00, "__space-age__/graphics/lut/fulgora-1-noon.png"},
+      },
+    },
+
     asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_lumos, 0.9),
   },
 })
